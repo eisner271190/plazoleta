@@ -21,7 +21,7 @@ public class RestauranteModel {
     private Long id;
 
     @NotBlank(message = "{validation.restaurant.name.required}")
-    @Pattern(regexp = RestaurantConstants.NOMBRE_REGEX, message = "{validation.restaurant.name.invalid}")
+    //@Pattern(regexp = RestaurantConstants.NOMBRE_REGEX, message = "{validation.restaurant.name.invalid}")
     @Column(nullable = false)
     private String nombre;
 
@@ -45,5 +45,5 @@ public class RestauranteModel {
     
     @NotNull(message = "{validation.restaurant.id_propietario.required}")
     @Column(nullable = false)
-    private int id_propietario;
+    private Long id_propietario;
 }

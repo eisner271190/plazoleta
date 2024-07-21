@@ -6,8 +6,8 @@ package com.plazoleta.demo.application.services;
 
 import com.plazoleta.demo.domain.model.RestauranteModel;
 import com.plazoleta.demo.domain.repositories.IRestauranteRepository;
-import com.plazoleta.demo.infraestructure.rest.WebClientClient;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.plazoleta.demo.infraestructure.externalService.UserClient;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,15 +15,10 @@ import org.springframework.stereotype.Service;
  * @author usuario
  */
 @Service
+@RequiredArgsConstructor
 public class RestauranteService {
-    @Autowired
-    private IRestauranteRepository restauranteRepository;
-    private final WebClientClient webClientClient;
-    
-    public RestauranteService(WebClientClient webClientClient)
-    {
-        this.webClientClient = webClientClient;
-    }
+    private final UserClient userClient;
+    private final IRestauranteRepository restauranteRepository;
     
     public void createRestaurante(RestauranteModel restaurante)
     {
@@ -35,8 +30,8 @@ public class RestauranteService {
         restauranteRepository.save(restaurante);
     }
     
-    private Boolean isOwnerUserRol(int id_propietario)
+    private Boolean isOwnerUserRol(Long id_propietario)
     {
-        return webClientClient.fetchDataFromApi("").block();
+        return userClient.getOwnerById(id_propietario);
     }
 }
