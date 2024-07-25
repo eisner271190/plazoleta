@@ -9,8 +9,6 @@ import com.plazoleta.demo.domain.model.PlatoModel;
 import com.plazoleta.demo.infraestructure.dto.request.ActivePlatoModel;
 import com.plazoleta.demo.infraestructure.dto.request.UpdatePlatoModel;
 import com.plazoleta.demo.infraestructure.security.JwtService;
-import com.plazoleta.demo.infraestructure.security.JwtUtils;
-import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

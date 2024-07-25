@@ -7,7 +7,6 @@ package com.plazoleta.demo.infraestructure.controllers;
 import com.plazoleta.demo.application.services.RestauranteService;
 import com.plazoleta.demo.domain.model.RestauranteModel;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

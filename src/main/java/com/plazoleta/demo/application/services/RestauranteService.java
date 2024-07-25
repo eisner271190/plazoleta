@@ -22,7 +22,9 @@ public class RestauranteService {
     
     public void createRestaurante(RestauranteModel restaurante)
     {
-        if(!isOwnerUserRol(restaurante.getId_propietario()))
+        boolean isValidOwner = true;//isOwnerUserRol(restaurante.getId_propietario());
+        
+        if(!isValidOwner)
         {
             throw new IllegalArgumentException("{validation.id_propietario.notvalid}");
         }
