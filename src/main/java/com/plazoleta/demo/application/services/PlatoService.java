@@ -10,7 +10,6 @@ import com.plazoleta.demo.domain.repositories.IPlatoRepository;
 import com.plazoleta.demo.domain.repositories.IRestauranteRepository;
 import com.plazoleta.demo.infraestructure.dto.request.UpdatePlatoModel;
 import jakarta.validation.Valid;
-import java.util.HashSet;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

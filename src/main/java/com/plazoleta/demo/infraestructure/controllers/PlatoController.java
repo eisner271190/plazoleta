@@ -8,6 +8,7 @@ import com.plazoleta.demo.application.services.PlatoService;
 import com.plazoleta.demo.domain.model.PlatoModel;
 import com.plazoleta.demo.infraestructure.dto.request.UpdatePlatoModel;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,17 +22,17 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/v1/platos")
+@RequiredArgsConstructor
 public class PlatoController {
 
-    @Autowired
-    private PlatoService platoService;
+    private final PlatoService platoService;
 
-    @PostMapping("/crear")
+    @PostMapping("/owner/crear")
     public void crearPlato(@RequestParam Long ownerId, @RequestBody @Valid PlatoModel plato) {
         platoService.createPlato(ownerId, plato);
     }
     
-    @PostMapping("/modificar")
+    @PostMapping("/owner/modificar")
     public void updatePlato(@RequestBody UpdatePlatoModel plato) {
         platoService.updatePlato(plato);
     }

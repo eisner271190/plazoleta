@@ -6,6 +6,7 @@ package com.plazoleta.demo.infraestructure.controllers;
 
 import com.plazoleta.demo.application.services.RestauranteService;
 import com.plazoleta.demo.domain.model.RestauranteModel;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,12 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/v1/restaurantes")
+@RequiredArgsConstructor
 public class RestauranteController {
 
-    @Autowired
-    private RestauranteService restauranteService;
+    private final RestauranteService restauranteService;
 
-    @PostMapping("/crear")
+    @PostMapping("/admin/crear")
     public void crearRestaurante(@RequestBody RestauranteModel restaurante) {
         restauranteService.createRestaurante(restaurante);
     }
