@@ -29,7 +29,7 @@ public class PlatoService {
         
         Optional<RestauranteModel> restaurante = restauranteRepository.findById(plato.getRestaurantId());
         
-        if (restaurante == null)
+        if (restaurante.isEmpty())
         {
             throw new IllegalArgumentException("{validation.idrestaurante.invalid}");
         }
@@ -48,7 +48,7 @@ public class PlatoService {
         
         Optional<PlatoModel> response = platoRepository.findById(update.getId());
         
-        if (response == null)
+        if (response.isEmpty())
         {
             throw new IllegalArgumentException("{validation.plato.invalid}");
         }
@@ -65,7 +65,7 @@ public class PlatoService {
         
         Optional<PlatoModel> response = platoRepository.findById(update.getId());
         
-        if (response == null)
+        if (response.isEmpty())
         {
             throw new IllegalArgumentException("{validation.plato.invalid}");
         }

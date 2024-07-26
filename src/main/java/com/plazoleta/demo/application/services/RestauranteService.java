@@ -27,7 +27,7 @@ public class RestauranteService {
     
     public void createRestaurante(RestauranteModel restaurante)
     {
-        boolean isValidOwner = true;//isOwnerUserRol(restaurante.getId_propietario());
+        boolean isValidOwner = isOwnerUserRol(restaurante.getId_propietario());
         
         if(!isValidOwner)
         {
