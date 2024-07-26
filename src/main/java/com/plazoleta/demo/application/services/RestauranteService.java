@@ -5,9 +5,13 @@
 package com.plazoleta.demo.application.services;
 
 import com.plazoleta.demo.domain.model.RestauranteModel;
+import com.plazoleta.demo.domain.repositories.IPagingAndSortingRestauranteRepository;
 import com.plazoleta.demo.domain.repositories.IRestauranteRepository;
 import com.plazoleta.demo.infraestructure.externalService.UserClient;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,8 +21,9 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class RestauranteService {
-    private final UserClient userClient;
     private final IRestauranteRepository restauranteRepository;
+    private final IPagingAndSortingRestauranteRepository pagingAndSortingRestauranteRepository;
+    private final UserClient userClient;
     
     public void createRestaurante(RestauranteModel restaurante)
     {
@@ -30,6 +35,12 @@ public class RestauranteService {
         }
         
         restauranteRepository.save(restaurante);
+    }
+    
+    public Page<RestauranteModel> getRestaurants(int page, int size)
+    {
+        Pageable pageable = PageRequest.of(page, size);
+        return pagingAndSortingRestauranteRepository.findAll(pageable);
     }
     
     private Boolean isOwnerUserRol(Long id_propietario)
