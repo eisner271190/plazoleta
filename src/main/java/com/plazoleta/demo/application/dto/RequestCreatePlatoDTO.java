@@ -1,32 +1,25 @@
-package com.plazoleta.demo.domain.model;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.plazoleta.demo.application.dto;
 
-public class PlatoModel {
-	private Long id;
-	private String nombre;
-	private int precio;
+/**
+ *
+ * @author usuario
+ */
+public class RequestCreatePlatoDTO {
+
+    private Long id;
+    private String nombre;
+    private int precio;
     private String descripcion;
     private String urlImage;
     private String category;
     private boolean active;
     private Long restaurantId;
+    private Long ownerId;
 
-    public PlatoModel() {
-    }
-
-    // Constructor con parámetros
-    public PlatoModel(Long id, String nombre, int precio, String descripcion,
-                      String urlImage, String category, boolean active, Long restaurantId) {
-        this.id = id;
-        this.nombre = nombre;
-        this.precio = precio;
-        this.descripcion = descripcion;
-        this.urlImage = urlImage;
-        this.category = category;
-        this.active = active;
-        this.restaurantId = restaurantId;
-    }
-
-    // Getters y Setters
     public Long getId() {
         return id;
     }
@@ -89,5 +82,13 @@ public class PlatoModel {
 
     public void setRestaurantId(Long restaurantId) {
         this.restaurantId = restaurantId;
+    }
+
+    public Long getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(Long ownerId) {
+        this.ownerId = ownerId;
     }
 }

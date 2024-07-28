@@ -1,15 +1,26 @@
-package com.plazoleta.demo.domain.model;
+package com.plazoleta.demo.infraestructure.jpa.entity;
 
-public class CategoriaModel {
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+public class CategoriaEntity {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@Column
 	private String nombre;
+
+	@Column
 	private String descripcion;
 
-	public CategoriaModel() {
+	public CategoriaEntity() {
 	}
 
 	// Constructor con parámetros
-	public CategoriaModel(Long id, String nombre, String descripcion) {
+	public CategoriaEntity(Long id, String nombre, String descripcion) {
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;

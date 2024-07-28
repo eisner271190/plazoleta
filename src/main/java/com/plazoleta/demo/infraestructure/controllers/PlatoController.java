@@ -4,18 +4,16 @@
  */
 package com.plazoleta.demo.infraestructure.controllers;
 
-import com.plazoleta.demo.application.services.PlatoService;
-import com.plazoleta.demo.domain.model.PlatoModel;
-import com.plazoleta.demo.infraestructure.dto.request.ActivePlatoModel;
-import com.plazoleta.demo.infraestructure.dto.request.UpdatePlatoModel;
+import com.plazoleta.demo.application.dto.RequestCreatePlatoDTO;
+import com.plazoleta.demo.application.handler.IPlatoHandler;
+import com.plazoleta.demo.application.dto.ActivePlatoDTO;
+import com.plazoleta.demo.application.dto.UpdatePlatoDTO;
 import com.plazoleta.demo.infraestructure.security.JwtService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -24,26 +22,34 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/v1/platos")
-@RequiredArgsConstructor
 public class PlatoController {
 
-    private final PlatoService platoService;
+    private final IPlatoHandler platoHandler;
     private final JwtService jwtService;
 
+    public PlatoController(IPlatoHandler platoHandler, JwtService jwtService) {
+        this.platoHandler = platoHandler;
+        this.jwtService = jwtService;
+    }
+
     @PostMapping("/owner/crear")
-    public void crearPlato(@RequestParam Long ownerId, @RequestBody @Valid PlatoModel plato) {
-        platoService.createPlato(ownerId, plato);
+    public void crearPlato(@RequestBody @Valid RequestCreatePlatoDTO plato, HttpServletRequest request ) {
+        Long id = Long.valueOf(jwtService.getClaim(request, "id_propietario"));
+        plato.setOwnerId(id);
+        platoHandler.createPlato(plato);
     }
     
     @PostMapping("/owner/modificar")
-    public void updatePlato(@RequestBody UpdatePlatoModel plato) {
-        platoService.updatePlato(plato);
+    public void updatePlato(@RequestBody UpdatePlatoDTO plato, HttpServletRequest request) {
+        Long id = Long.valueOf(jwtService.getClaim(request, "id_propietario"));
+        plato.setOwnerId(id);
+        platoHandler.updatePlato(plato);
     }
     
     @PostMapping("/owner/activar")
-    public void activePlato(@RequestBody ActivePlatoModel plato, HttpServletRequest request) {
+    public void activePlato(@RequestBody ActivePlatoDTO plato, HttpServletRequest request) {
         Long id = Long.valueOf(jwtService.getClaim(request, "id_propietario"));
         plato.setId_propietario(id);
-        platoService.activePlato(plato);
+        platoHandler.activePlato(plato);
     }
 }

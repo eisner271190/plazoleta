@@ -4,9 +4,9 @@
  */
 package com.plazoleta.demo.infraestructure.controllers;
 
-import com.plazoleta.demo.application.services.RestauranteService;
+import com.plazoleta.demo.application.dto.RequestCreateRestauranteDTO;
+import com.plazoleta.demo.application.handler.IRestauranteHandler;
 import com.plazoleta.demo.domain.model.RestauranteModel;
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,14 +21,17 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/v1/restaurantes")
-@RequiredArgsConstructor
 public class RestauranteController {
 
-    private final RestauranteService restauranteService;
+    private final IRestauranteHandler restauranteHandler;
+
+    public RestauranteController(IRestauranteHandler restauranteHandler) {
+        this.restauranteHandler = restauranteHandler;
+    }
 
     @PostMapping("/admin/crear")
-    public void crearRestaurante(@RequestBody RestauranteModel restaurante) {
-        restauranteService.createRestaurante(restaurante);
+    public void crearRestaurante(@RequestBody RequestCreateRestauranteDTO restaurante) {
+        restauranteHandler.createRestaurante(restaurante);
     }
     
     @GetMapping("/owner/listar")
@@ -38,6 +41,6 @@ public class RestauranteController {
         @RequestParam(defaultValue = "10") int size 
     )
     {
-        return restauranteService.getRestaurants(page, size);
+        return restauranteHandler.getRestaurants(page, size);
     }
 }

@@ -1,6 +1,13 @@
-package com.plazoleta.demo.domain.model;
+package com.plazoleta.demo.application.dto;
 
-public class RestauranteModel {
+import com.plazoleta.demo.domain.constants.RestaurantConstants;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import lombok.Data;
+
+public class RequestCreateRestauranteDTO {
     private Long id;
     private String nombre;
     private String nit;
@@ -9,12 +16,12 @@ public class RestauranteModel {
     private String urlLogo;
     private Long id_propietario;
 
-    public RestauranteModel() {
+    public RequestCreateRestauranteDTO() {
     }
 
     // Constructor con parámetros
-    public RestauranteModel(Long id, String nombre, String nit, String direccion,
-                            String telefono, String urlLogo, Long id_propietario) {
+    public RequestCreateRestauranteDTO(Long id, String nombre, String nit, String direccion,
+                                       String telefono, String urlLogo, Long id_propietario) {
         this.id = id;
         this.nombre = nombre;
         this.nit = nit;
