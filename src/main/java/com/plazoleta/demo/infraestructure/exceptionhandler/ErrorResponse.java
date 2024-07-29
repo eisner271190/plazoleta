@@ -1,4 +1,4 @@
-package com.usuarios.usuarios.infraestructure.exceptionhandler;
+package com.plazoleta.demo.infraestructure.exceptionhandler;
 
 public class ErrorResponse {
     private int status;

@@ -5,11 +5,13 @@
 package com.plazoleta.demo.application.handler;
 
 import com.plazoleta.demo.application.dto.RequestCreateRestauranteDTO;
+import com.plazoleta.demo.application.dto.ResponseRestauranteDTO;
 import com.plazoleta.demo.application.mapper.IRestauranteMapper;
 import com.plazoleta.demo.domain.model.RestauranteModel;
 import com.plazoleta.demo.domain.ports.IRestauranteServicePort;
 import com.plazoleta.demo.infraestructure.exception.UserNotOwnerException;
 import com.plazoleta.demo.infraestructure.externalService.UserClient;
+import com.plazoleta.demo.infraestructure.jpa.mapper.RestaurantePageMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
@@ -21,13 +23,16 @@ import org.springframework.stereotype.Service;
 public class RestauranteHandler implements IRestauranteHandler {
     private final IRestauranteServicePort restauranteServicePort;
     private final IRestauranteMapper restauranteMapper;
+    private final RestaurantePageMapper restaurantePageMapper;
     private final UserClient userClient;
 
     public RestauranteHandler(IRestauranteServicePort restauranteServicePort,
                               IRestauranteMapper restauranteMapper,
+                              RestaurantePageMapper restaurantePageMapper,
                               UserClient userClient) {
         this.restauranteServicePort = restauranteServicePort;
         this.restauranteMapper = restauranteMapper;
+        this.restaurantePageMapper = restaurantePageMapper;
         this.userClient = userClient;
     }
     
@@ -42,9 +47,11 @@ public class RestauranteHandler implements IRestauranteHandler {
         restauranteServicePort.saveRestaurante(restaurante);
     }
     
-    public Page<RestauranteModel> getRestaurants(int page, int size)
+    public Page<ResponseRestauranteDTO> getRestaurants(int page, int size)
     {
-        return restauranteServicePort.getRestaurants(page, size);
+        var model = restauranteServicePort.getRestaurants(page, size);
+        Page<ResponseRestauranteDTO> response = restaurantePageMapper.toDTOPage(model);
+        return response;
     }
     
     private Boolean isOwnerUserRol(Long id_propietario)

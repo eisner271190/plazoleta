@@ -1,7 +1,9 @@
 package com.plazoleta.demo.infraestructure.jpa.mapper;
 
+import com.plazoleta.demo.application.dto.ResponseRestauranteDTO;
 import com.plazoleta.demo.domain.model.RestauranteModel;
 import com.plazoleta.demo.infraestructure.jpa.entity.RestauranteEntity;
+import feign.Response;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Component;
@@ -32,5 +34,21 @@ public class RestaurantePageMapper {
                 .collect(Collectors.toList());
 
         return new PageImpl<>(entities, modelPage.getPageable(), modelPage.getTotalElements());
+    }
+
+    public Page<RestauranteModel> toModel(Page<ResponseRestauranteDTO> dtoPage) {
+        List<RestauranteModel> models = dtoPage.getContent().stream()
+                .map(restauranteMapper::toModel)
+                .collect(Collectors.toList());
+
+        return new PageImpl<>(models, dtoPage.getPageable(), dtoPage.getTotalElements());
+    }
+
+    public Page<ResponseRestauranteDTO> toDTOPage(Page<RestauranteModel> modelPage) {
+        List<ResponseRestauranteDTO> dto = modelPage.getContent().stream()
+                .map(restauranteMapper::toDTO)
+                .collect(Collectors.toList());
+
+        return new PageImpl<>(dto, modelPage.getPageable(), modelPage.getTotalElements());
     }
 }

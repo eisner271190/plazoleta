@@ -5,6 +5,7 @@
 package com.plazoleta.demo.infraestructure.controllers;
 
 import com.plazoleta.demo.application.dto.RequestCreateRestauranteDTO;
+import com.plazoleta.demo.application.dto.ResponseRestauranteDTO;
 import com.plazoleta.demo.application.handler.IRestauranteHandler;
 import com.plazoleta.demo.domain.model.RestauranteModel;
 import org.springframework.data.domain.Page;
@@ -34,8 +35,8 @@ public class RestauranteController {
         restauranteHandler.createRestaurante(restaurante);
     }
     
-    @GetMapping("/owner/listar")
-    public Page<RestauranteModel> getRestaurants
+    @GetMapping("/client/listar")
+    public Page<ResponseRestauranteDTO> getRestaurants
     (
         @RequestParam(defaultValue = "1") int page,
         @RequestParam(defaultValue = "10") int size 
