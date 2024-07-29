@@ -4,17 +4,13 @@
  */
 package com.plazoleta.demo.infraestructure.controllers;
 
-import com.plazoleta.demo.application.dto.RequestCreatePlatoDTO;
+import com.plazoleta.demo.application.dto.*;
 import com.plazoleta.demo.application.handler.IPlatoHandler;
-import com.plazoleta.demo.application.dto.ActivePlatoDTO;
-import com.plazoleta.demo.application.dto.UpdatePlatoDTO;
 import com.plazoleta.demo.infraestructure.security.JwtService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.*;
 
 /**
  *
@@ -51,5 +47,18 @@ public class PlatoController {
         Long id = Long.valueOf(jwtService.getClaim(request, "id_propietario"));
         plato.setId_propietario(id);
         platoHandler.activePlato(plato);
+    }
+
+    @GetMapping("/client/listar")
+    public Page<ResponsePlatoDTO> getRestaurants
+            (
+                    @RequestParam Long idRestaurante,
+                    @RequestParam(defaultValue = "") String category,
+                    @RequestParam(defaultValue = "1") int page,
+                    @RequestParam(defaultValue = "10") int size
+            )
+    {
+        var request = new RequestSearchPlatoDTO(idRestaurante, page, category, size);
+        return platoHandler.getPlatos(request);
     }
 }

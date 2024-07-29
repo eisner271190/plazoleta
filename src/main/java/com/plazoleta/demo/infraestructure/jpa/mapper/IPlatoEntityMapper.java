@@ -1,5 +1,6 @@
 package com.plazoleta.demo.infraestructure.jpa.mapper;
 
+import com.plazoleta.demo.application.dto.ResponsePlatoDTO;
 import com.plazoleta.demo.domain.model.PlatoModel;
 import com.plazoleta.demo.infraestructure.jpa.entity.PlatoEntity;
 import org.mapstruct.Mapper;
@@ -9,4 +10,7 @@ import org.mapstruct.ReportingPolicy;
 public interface IPlatoEntityMapper {
     PlatoModel toModel(PlatoEntity entity);
     PlatoEntity toEntity(PlatoModel model);
+
+    PlatoModel toModel(ResponsePlatoDTO dto);
+    ResponsePlatoDTO toDTO(PlatoModel model);
 }

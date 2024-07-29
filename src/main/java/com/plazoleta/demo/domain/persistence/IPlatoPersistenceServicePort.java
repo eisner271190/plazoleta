@@ -4,7 +4,9 @@
  */
 package com.plazoleta.demo.domain.persistence;
 
+import com.plazoleta.demo.application.dto.RequestSearchPlatoDTO;
 import com.plazoleta.demo.domain.model.PlatoModel;
+import org.springframework.data.domain.Page;
 
 /**
  *
@@ -14,4 +16,5 @@ public interface IPlatoPersistenceServicePort
 {
     PlatoModel findById(Long id);
     void savePlato(PlatoModel plato);
+    Page<PlatoModel> getPlatos(RequestSearchPlatoDTO request);
 }

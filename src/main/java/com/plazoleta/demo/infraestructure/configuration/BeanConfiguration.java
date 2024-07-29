@@ -14,7 +14,9 @@ import com.plazoleta.demo.infraestructure.jpa.adapter.PlatoAdapter;
 import com.plazoleta.demo.infraestructure.jpa.adapter.RestauranteAdapter;
 import com.plazoleta.demo.infraestructure.jpa.mapper.IPlatoEntityMapper;
 import com.plazoleta.demo.infraestructure.jpa.mapper.IRestauranteEntityMapper;
+import com.plazoleta.demo.infraestructure.jpa.mapper.PlatoPageMapper;
 import com.plazoleta.demo.infraestructure.jpa.mapper.RestaurantePageMapper;
+import com.plazoleta.demo.infraestructure.jpa.repositories.IPagingAndSortingPlatoRepository;
 import com.plazoleta.demo.infraestructure.jpa.repositories.IPagingAndSortingRestauranteRepository;
 import com.plazoleta.demo.infraestructure.jpa.repositories.IPlatoRepository;
 import com.plazoleta.demo.infraestructure.jpa.repositories.IRestauranteRepository;
@@ -35,19 +37,25 @@ public class BeanConfiguration {
     
     private final IPlatoRepository platoRepository;
     private final IPlatoEntityMapper platoEntityMapper;
+    private final IPagingAndSortingPlatoRepository pagingAndSortingPlatoRepository;
+    private final PlatoPageMapper platoPageMapper;
 
     public BeanConfiguration(IRestauranteRepository restauranteRepository,
                              IRestauranteEntityMapper restauranteEntityMapper,
                              IPagingAndSortingRestauranteRepository pagingAndSortingRestauranteRepository,
                              RestaurantePageMapper restaurantePageMapper,
                              IPlatoRepository platoRepository,
-                             IPlatoEntityMapper platoEntityMapper) {
+                             IPlatoEntityMapper platoEntityMapper,
+                             IPagingAndSortingPlatoRepository pagingAndSortingPlatoRepository,
+                             PlatoPageMapper platoPageMapper) {
         this.restauranteRepository = restauranteRepository;
         this.restauranteEntityMapper = restauranteEntityMapper;
         this.pagingAndSortingRestauranteRepository = pagingAndSortingRestauranteRepository;
         this.restaurantePageMapper = restaurantePageMapper;
         this.platoRepository = platoRepository;
         this.platoEntityMapper = platoEntityMapper;
+        this.pagingAndSortingPlatoRepository = pagingAndSortingPlatoRepository;
+        this.platoPageMapper = platoPageMapper;
     }
     
     @Bean
@@ -62,7 +70,7 @@ public class BeanConfiguration {
     
     @Bean
     public IPlatoPersistenceServicePort platoPersistenceServicePort() {
-        return new PlatoAdapter(platoRepository, platoEntityMapper);
+        return new PlatoAdapter(platoRepository, pagingAndSortingPlatoRepository, platoPageMapper, platoEntityMapper);
     }
     
     @Bean

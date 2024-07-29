@@ -4,7 +4,9 @@
  */
 package com.plazoleta.demo.domain.ports;
 
+import com.plazoleta.demo.application.dto.RequestSearchPlatoDTO;
 import com.plazoleta.demo.domain.model.PlatoModel;
+import org.springframework.data.domain.Page;
 
 import java.util.Optional;
 
@@ -16,4 +18,5 @@ public interface IPlatoServicePort
 {
     PlatoModel findById(Long id);
     void savePlato(PlatoModel plato);
+    Page<PlatoModel> getPlatos(RequestSearchPlatoDTO request);
 }

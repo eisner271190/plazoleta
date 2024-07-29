@@ -4,9 +4,12 @@
  */
 package com.plazoleta.demo.domain.usecase;
 
+import com.plazoleta.demo.application.dto.RequestSearchPlatoDTO;
 import com.plazoleta.demo.domain.model.PlatoModel;
+import com.plazoleta.demo.domain.model.RestauranteModel;
 import com.plazoleta.demo.domain.persistence.IPlatoPersistenceServicePort;
 import com.plazoleta.demo.domain.ports.IPlatoServicePort;
+import org.springframework.data.domain.Page;
 
 /**
  *
@@ -28,5 +31,10 @@ public class PlatoUseCase implements IPlatoServicePort {
     @Override
     public void savePlato(PlatoModel plato) {
         platoPersistenceServicePort.savePlato(plato);
+    }
+
+    @Override
+    public Page<PlatoModel> getPlatos(RequestSearchPlatoDTO request) {
+        return platoPersistenceServicePort.getPlatos(request);
     }
 }
