@@ -36,6 +36,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/v1/restaurantes/client/**").permitAll()
                 .requestMatchers("/api/v1/platos/client/**").permitAll()
                 .requestMatchers("/api/v1/pedido/client/**").permitAll()//.hasRole("Cliente")
+                .requestMatchers("/api/v1/pedido/employee/**").permitAll()//.hasRole("Empleado")
                 .requestMatchers("/api/v1/users/admin/**").hasRole("Administrador")
                 .requestMatchers("/api/v1/restaurantes/admin/**").hasRole("Administrador")
                 .requestMatchers("/api/v1/users/owner/**").hasRole("Propietario")

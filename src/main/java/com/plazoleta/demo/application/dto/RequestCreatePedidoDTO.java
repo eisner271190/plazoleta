@@ -20,16 +20,16 @@ public class RequestCreatePedidoDTO {
     private Date fecha;
     private String estado;
     private int id_chef;
-    private RestauranteModel id_restaurante;
+    private RequestRestauranteDTO restaurante;
     private Set<PedidoPlatoModel> platos;
 
-    public RequestCreatePedidoDTO(Long id, int id_cliente, Date fecha, String estado, int id_chef, RestauranteModel id_restaurante, Set<PedidoPlatoModel> platos) {
+    public RequestCreatePedidoDTO(Long id, int id_cliente, Date fecha, String estado, int id_chef, RequestRestauranteDTO restaurante, Set<PedidoPlatoModel> platos) {
         this.id = id;
         this.id_cliente = id_cliente;
         this.fecha = fecha;
         this.estado = estado;
         this.id_chef = id_chef;
-        this.id_restaurante = id_restaurante;
+        this.restaurante = restaurante;
         this.platos = platos;
     }
 
@@ -73,12 +73,12 @@ public class RequestCreatePedidoDTO {
         this.id_chef = id_chef;
     }
 
-    public RestauranteModel getId_restaurante() {
-        return id_restaurante;
+    public RequestRestauranteDTO getRestaurante() {
+        return restaurante;
     }
 
-    public void setId_restaurante(RestauranteModel id_restaurante) {
-        this.id_restaurante = id_restaurante;
+    public void setRestaurante(RequestRestauranteDTO restaurante) {
+        this.restaurante = restaurante;
     }
 
     public Set<PedidoPlatoModel> getPlatos() {

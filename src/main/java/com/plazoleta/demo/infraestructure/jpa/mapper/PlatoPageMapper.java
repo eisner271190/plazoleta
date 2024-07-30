@@ -1,15 +1,11 @@
 package com.plazoleta.demo.infraestructure.jpa.mapper;
 
 import com.plazoleta.demo.application.dto.ResponsePlatoDTO;
-import com.plazoleta.demo.application.dto.ResponseRestauranteDTO;
 import com.plazoleta.demo.domain.model.PlatoModel;
-import com.plazoleta.demo.domain.model.RestauranteModel;
 import com.plazoleta.demo.infraestructure.jpa.entity.PlatoEntity;
-import com.plazoleta.demo.infraestructure.jpa.entity.RestauranteEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 import java.util.stream.Collectors;
 

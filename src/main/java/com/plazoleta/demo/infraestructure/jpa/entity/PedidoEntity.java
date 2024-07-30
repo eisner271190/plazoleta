@@ -1,5 +1,6 @@
 package com.plazoleta.demo.infraestructure.jpa.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -26,7 +27,7 @@ public class PedidoEntity {
 	
 	@ManyToOne
     @JoinColumn(name = "restaurante_id", nullable = false)
-	private RestauranteEntity id_restaurante;
+	private RestauranteEntity restaurante;
 	
 	@Column
 	private String nit;
@@ -37,13 +38,13 @@ public class PedidoEntity {
 	public PedidoEntity() { }
 
 	public PedidoEntity(Long id, int id_cliente, Date fecha, String estado, int id_chef,
-					   RestauranteEntity id_restaurante, String nit, Set<PedidoPlatoEntity> platos) {
+						RestauranteEntity restaurante, String nit, Set<PedidoPlatoEntity> platos) {
 		this.id = id;
 		this.id_cliente = id_cliente;
 		this.fecha = fecha;
 		this.estado = estado;
 		this.id_chef = id_chef;
-		this.id_restaurante = id_restaurante;
+		this.restaurante = restaurante;
 		this.nit = nit;
 		this.platos = platos;
 	}
@@ -89,12 +90,12 @@ public class PedidoEntity {
 		this.id_chef = id_chef;
 	}
 
-	public RestauranteEntity getId_restaurante() {
-		return id_restaurante;
+	public RestauranteEntity getRestaurante() {
+		return restaurante;
 	}
 
-	public void setId_restaurante(RestauranteEntity id_restaurante) {
-		this.id_restaurante = id_restaurante;
+	public void setRestaurante(RestauranteEntity restaurante) {
+		this.restaurante = restaurante;
 	}
 
 	public String getNit() {

@@ -9,8 +9,8 @@ public class PedidoPlatoEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pedido_id", nullable = false)
+	@ManyToOne
+	@JoinColumn(name = "pedido_id", nullable = false)
 	private PedidoEntity pedido;
 
 	@ManyToOne
@@ -22,9 +22,9 @@ public class PedidoPlatoEntity {
 
 	public PedidoPlatoEntity() {}
 
-	public PedidoPlatoEntity(Long id, PedidoEntity id_pedido, PlatoEntity plato, int cantidad) {
+	public PedidoPlatoEntity(Long id, PedidoEntity pedido, PlatoEntity plato, int cantidad) {
 		this.id = id;
-		this.pedido = id_pedido;
+		this.pedido = pedido;
 		this.plato = plato;
 		this.cantidad = cantidad;
 	}

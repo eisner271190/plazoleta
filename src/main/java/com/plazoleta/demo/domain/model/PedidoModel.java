@@ -9,20 +9,20 @@ public class PedidoModel {
 	private Date fecha;
 	private String estado;
 	private int id_chef;
-	private RestauranteModel id_restaurante;
+	private RestauranteModel restaurante;
 	private String nit;
 	private Set<PedidoPlatoModel> platos;
 
 	public PedidoModel() { }
 
 	public PedidoModel(Long id, int id_cliente, Date fecha, String estado, int id_chef,
-						RestauranteModel id_restaurante, String nit, Set<PedidoPlatoModel> platos) {
+					   RestauranteModel restaurante, String nit, Set<PedidoPlatoModel> platos) {
 		this.id = id;
 		this.id_cliente = id_cliente;
 		this.fecha = fecha;
 		this.estado = estado;
 		this.id_chef = id_chef;
-		this.id_restaurante = id_restaurante;
+		this.restaurante = restaurante;
 		this.nit = nit;
 		this.platos = platos;
 	}
@@ -67,12 +67,12 @@ public class PedidoModel {
 		this.id_chef = id_chef;
 	}
 
-	public RestauranteModel getId_restaurante() {
-		return id_restaurante;
+	public RestauranteModel getRestaurante() {
+		return restaurante;
 	}
 
-	public void setId_restaurante(RestauranteModel id_restaurante) {
-		this.id_restaurante = id_restaurante;
+	public void setRestaurante(RestauranteModel restaurante) {
+		this.restaurante = restaurante;
 	}
 
 	public String getNit() {

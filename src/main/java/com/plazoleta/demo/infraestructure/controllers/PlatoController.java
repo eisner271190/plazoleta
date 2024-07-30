@@ -51,12 +51,12 @@ public class PlatoController {
 
     @GetMapping("/client/listar")
     public Page<ResponsePlatoDTO> getRestaurants
-            (
-                    @RequestParam Long idRestaurante,
-                    @RequestParam(defaultValue = "") String category,
-                    @RequestParam(defaultValue = "1") int page,
-                    @RequestParam(defaultValue = "10") int size
-            )
+    (
+            @RequestParam Long idRestaurante,
+            @RequestParam(defaultValue = "") String category,
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "10") int size
+    )
     {
         var request = new RequestSearchPlatoDTO(idRestaurante, page, category, size);
         return platoHandler.getPlatos(request);

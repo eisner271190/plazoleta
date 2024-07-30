@@ -4,9 +4,11 @@
  */
 package com.plazoleta.demo.domain.usecase;
 
+import com.plazoleta.demo.application.dto.RequestSearchPedidoDTO;
 import com.plazoleta.demo.domain.model.PedidoModel;
 import com.plazoleta.demo.domain.persistence.IPedidoPersistenceServicePort;
 import com.plazoleta.demo.domain.ports.IPedidoServicePort;
+import org.springframework.data.domain.Page;
 
 /**
  *
@@ -28,5 +30,10 @@ public class PedidoUseCase implements IPedidoServicePort {
     @Override
     public void savePedido(PedidoModel pedido) {
         pedidoPersistenceServicePort.savePedido(pedido);
+    }
+
+    @Override
+    public Page<PedidoModel> getPedidos(RequestSearchPedidoDTO request) {
+        return pedidoPersistenceServicePort.getPedidos(request);
     }
 }

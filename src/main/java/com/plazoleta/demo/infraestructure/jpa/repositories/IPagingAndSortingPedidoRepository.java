@@ -5,6 +5,9 @@
 package com.plazoleta.demo.infraestructure.jpa.repositories;
 
 import com.plazoleta.demo.infraestructure.jpa.entity.PedidoEntity;
+import com.plazoleta.demo.infraestructure.jpa.entity.RestauranteEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,4 +17,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface IPagingAndSortingPedidoRepository extends PagingAndSortingRepository<PedidoEntity, Long> {
+    Page<PedidoEntity> findByEstadoAndRestaurante(String estado, RestauranteEntity restaurante, Pageable pageable);
 }
