@@ -1,12 +1,10 @@
 package com.plazoleta.demo.infraestructure.jpa.entity;
 
-import com.plazoleta.demo.domain.model.RestauranteModel;
 import jakarta.persistence.*;
-import lombok.Data;
-
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-@Data
 @Entity
 @Table(name = "pedido")
 public class PedidoEntity {
@@ -33,12 +31,13 @@ public class PedidoEntity {
 	@Column
 	private String nit;
 
-	public PedidoEntity() {
-	}
+	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = false)
+	private Set<PedidoPlatoEntity> platos = new HashSet<>();
 
-	// Constructor con parámetros
+	public PedidoEntity() { }
+
 	public PedidoEntity(Long id, int id_cliente, Date fecha, String estado, int id_chef,
-					   RestauranteEntity id_restaurante, String nit) {
+					   RestauranteEntity id_restaurante, String nit, Set<PedidoPlatoEntity> platos) {
 		this.id = id;
 		this.id_cliente = id_cliente;
 		this.fecha = fecha;
@@ -46,6 +45,7 @@ public class PedidoEntity {
 		this.id_chef = id_chef;
 		this.id_restaurante = id_restaurante;
 		this.nit = nit;
+		this.platos = platos;
 	}
 
 	// Getters y Setters
@@ -104,4 +104,8 @@ public class PedidoEntity {
 	public void setNit(String nit) {
 		this.nit = nit;
 	}
+
+	public Set<PedidoPlatoEntity> getPlatos() { return platos; }
+
+	public void setPlatos(Set<PedidoPlatoEntity> platos) { this.platos = platos; }
 }
